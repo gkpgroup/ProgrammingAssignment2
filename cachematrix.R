@@ -65,12 +65,18 @@ makeCacheMatrix <- function(inputMatrix = matrix()) {
 cacheSolve <- function(iMatrix, ...) {
   # Get the inverse matrix stored in cache, iMatrix is a collection of functions
   invMatrix <- iMatrix$getInverseMatrix()
+  
+  # Check to see if the Inverse Matrix already cached
   if(!is.null(invMatrix)) {
-    message("getting cached data")
+    message("Getting cached Inverse Matrix")
     return(invMatrix)
   }
+  
+  # If cache is NULL, recalculate the inverse matrix and store it in cache
   inpMatrix <- iMatrix$getMatrix()
   invMatrix <- solve(inpMatrix,...)
   iMatrix$setInverseMatrix(invMatrix)
+  
+  # Return the inverse matrix 
   invMatrix
 }
